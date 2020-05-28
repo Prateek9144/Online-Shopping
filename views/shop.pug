@@ -1,0 +1,21 @@
+extends layout/main-layout.pug
+block style
+	link(rel="stylesheet", href="/css/product.css")
+block content
+	main
+		if prods.length > 0
+			.grid
+				each product in prods
+					article.card.product-item
+						header.card__header
+							h1.product__title #{product.title}
+						div.card__image
+							img(src="https://img.etimg.com/thumb/msid-67619899,width-640,resizemode-4,imgsize-134956/coincidence-or-what.jpg", alt="A Book")
+						div.card__content
+							h2.product__price Rs.1000
+							p.product__description  A very instresting book about so many instresting things!
+						.card__action
+							button.btn Add to card
+		else	
+			h1 No products
+	
