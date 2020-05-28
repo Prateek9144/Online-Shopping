@@ -10,15 +10,11 @@ router.get("/add-product", (req, res, next) => {
   res.render("add-product", {
     docTitle: "Add Products",
     path: "/admin/add-product",
-    activeProduct: true,
-    ProductCSS: true,
-    FormCSS: true,
   });
 });
 
 router.post("/add-product", (req, res, next) => {
   product.push({ title: req.body.title });
-  console.log(product);
   res.redirect("/");
 });
 
