@@ -13,9 +13,11 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const imageUrl = req.body.imageUrl;
   const description = req.body.description;
-  const newproduct = new Product(null,title, imageUrl, price, description);
-  newproduct.save();
-  res.redirect("/");
+  const newproduct = new Product(null, title, imageUrl, price, description);
+  newproduct
+    .save()
+    .then(() => res.redirect("/"))
+    .catch((err) => console.log(err));
 };
 
 exports.getEditProduct = (req, res, next) => {
@@ -35,20 +37,20 @@ exports.getEditProduct = (req, res, next) => {
 };
 
 exports.postEditProduct = (req, res, next) => {
-	const id = req.body.id;
-	const title = req.body.title;
-	const price = req.body.price;
-	const imageUrl = req.body.imageUrl;
-	const description = req.body.description;
-	const newproduct = new Product(id,title, imageUrl, price, description);
-	newproduct.save();
-	res.redirect('/admin/products')
+  const id = req.body.id;
+  const title = req.body.title;
+  const price = req.body.price;
+  const imageUrl = req.body.imageUrl;
+  const description = req.body.description;
+  const newproduct = new Product(id, title, imageUrl, price, description);
+  newproduct.save();
+  res.redirect("/admin/products");
 };
 
 exports.postDeleteProduct = (req, res, next) => {
-	const id = req.body.productId;
-	Product.deleteById(id);
-	res.redirect('/admin/products')
+  const id = req.body.productId;
+  Product.deleteById(id);
+  res.redirect("/admin/products");
 };
 
 exports.getProducts = (req, res, next) => {
