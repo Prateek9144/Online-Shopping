@@ -6,7 +6,7 @@ exports.getAddProduct = (req, res, next) => {
     path: "/admin/add-product",
     editing: false,
   });
-};
+};	
 
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;

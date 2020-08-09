@@ -6,6 +6,13 @@
   width: 40rem;
   max-width: 90%;
 }
+.order__item-list {
+  list-style: none;
+  margin: 1rem;
+  padding: 1rem;
+  width:3	0rem;
+  max-width: 90%;
+}
 
 .cart__item {
   display: flex;
@@ -21,4 +28,17 @@
   font-size: 1.2rem;
   margin: 0;
 }
+
+.danger{
+	color: #df0303;
+	border: 1px solid #df0303;
+}
+
+.danger:hover,
+.danger:active {
+  background-color: #df0303;
+  color: white;
+}
+
+
 

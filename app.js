@@ -7,6 +7,8 @@ const Product = require("./models/product");
 const User = require("./models/user");
 const Cart = require("./models/cart");
 const CartItem = require("./models/cart-item");
+const Order = require("./models/order");
+const OrderItem = require("./models/order-item");
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -14,7 +16,7 @@ app.set("views", "views");
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const errorController = require("./controllers/error");
-const { findByPk } = require("./models/user");
+const { findByPk, belongsTo } = require("./models/user");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
@@ -39,9 +41,12 @@ Cart.belongsTo(User);
 User.hasOne(Cart);
 Cart.belongsToMany(Product, { through: CartItem });
 Product.belongsToMany(Cart, { through: CartItem });
+Order.belongsTo(User);
+User.hasMany(Order);
+Order.belongsToMany(Product,{through : OrderItem});
 
 sequelize
-  // .sync({ force: true })
+	// .sync({ force: true })
   .sync()
   .then((result) => {
     // console.log(result);
@@ -51,7 +56,7 @@ sequelize
     if (!user) {
       return User.create({
         name: "Prateek",
-        email: "prateekchouhan00@gmail.com",
+         email: "prateekchouhan00@gmail.com",
       });
     }
     return user;
