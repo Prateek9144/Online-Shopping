@@ -10,15 +10,15 @@
   list-style: none;
   margin: 1rem;
   padding: 1rem;
-  width:3	0rem;
-  max-width: 90%;
+  width: 3 0rem;
+  max-width: 80%;
 }
 
 .cart__item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }
 
@@ -29,9 +29,9 @@
   margin: 0;
 }
 
-.danger{
-	color: #df0303;
-	border: 1px solid #df0303;
+.danger {
+  color: #df0303;
+  border: 1px solid #df0303;
 }
 
 .danger:hover,
@@ -39,6 +39,3 @@
   background-color: #df0303;
   color: white;
 }
-
-
-
