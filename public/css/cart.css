@@ -19,7 +19,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.26);
+	background-color: rgb(218, 216, 216);
 }
 
 .cart__item h1,

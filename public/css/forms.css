@@ -1,4 +1,6 @@
 .form-control {
+	font-size: larger;
+	color: aliceblue;
   margin: 1rem 0;
 }
 
@@ -11,8 +13,10 @@
 }
 .form-control input,
 .form-control textarea {
-  border: 1px solid #a1a1a1;
-  font: inherit;
+	border: 1px solid #573838;
+	color: white;
+	font: inherit;
+	background-color: rgb(4, 82, 82);
   border-radius: 2px;
 }
 
