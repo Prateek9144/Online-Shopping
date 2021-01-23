@@ -1,10 +1,19 @@
 .product-form {
-    width: 20rem;
-    max-width: 90%;
-    margin: auto;
-    display: block;
+	width: 20rem;
+	max-width: 90%;
+	margin: auto;
+	display: block;
 }
 
+.shop-item {
+
+flex-wrap: wrap;
+box-shadow: 0 2px 6px rgb(5, 5, 5);
+padding: 5px;
+margin: 20px;
+width: 30rem;
+justify-content: space-around;
+}
 .product-item {
     width: 20rem;
     max-width: 95%;
@@ -12,16 +21,64 @@
 }
 
 .product__title {
-    font-size: 1.2rem;
-    text-align: center;
+		font-size: 1.2rem;
+		text-align: center;
 }
 
 .product__price {
     text-align: center;
-    color: #4d4d4d;
+    color: #3d3d3d;
     margin-bottom: 0.5rem;
 }
 
 .product__description {
     text-align: center;
+}
+
+.shop-item-image {
+	    height: 250px;
+	    /* max-wi	dth: 28rem; */
+	    display: flex;
+}
+
+.shop-item-image img {
+	max-width: 100%;
+	max-height: 100%;
+	margin: auto;
+}
+
+.shop-item-details {
+	display: flex;
+	align-items: center;
+	padding: 5px;
+}
+
+.shop-item-price {
+	flex-grow: 2;
+	color: black;}
+
+	.shop-item-title {
+		display: block;
+		width: 100%;
+		text-align: center;
+		font-weight: bold;
+		font-size: 1.5em;
+		color: black;		margin-bottom: 15px;
+	}
+.shop-item-button{
+	  display: inline-block;
+	  padding: 0.25rem 1rem;
+	  text-decoration: none;
+	  font: inherit;
+	  border-radius: 3px;
+	  cursor: pointer;
+	  border: 1px solid midnightblue;
+	  background-color: transparent;
+	  color: midnightblue;
+		margin: 2px;
+}
+.shop-item-button:hover,
+.shop-item-button:active {
+	background-color:midnightblue;
+	color: aliceblue;
 }
