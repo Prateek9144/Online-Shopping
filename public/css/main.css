@@ -8,11 +8,12 @@ body {
   padding: 0;
   margin: 0;
 	font-family: "Open Sans", sans-serif;
-	background-color: #12232E
+	background-color: whitesmoke
+
 }
 
 .center {
-  text-align: center;
+	color: black;  text-align: center;
 }
 
 .image {
@@ -33,18 +34,21 @@ form {
 
 .main-header {
   width: 100%;
-  height: 4.5rem;
-	background-color: #007cc7;
-	margin-bottom: 1rem;
-  padding: 0 1.0rem;
+  height: 5.5rem;
+	background-color: #343a40;
+	margin-bottom: 1rem;	
   display: flex;
   align-items: center;
 }
 
 .main-header__nav {
-  height: 100%;
-  display: none;
-  align-items: center;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+	box-shadow: 0 6px 10px rgb(5, 5, 5);
+	justify-content: space-between;
 }
 
 .main-header__item-list {
@@ -53,7 +57,6 @@ form {
   padding: 0;
 	display: flex;
 	margin-top: 1rem;
-	margin-right: 1rem;
 	font-size: 1.2rem;
 
 }
@@ -64,16 +67,22 @@ form {
   padding: 0;
 }
 
-.main-header__item a {
-	text-decoration: none;
-	
-  color: white;
+.main-header__item a,
+.main-header__item button {
+ font: inherit;
+ background: transparent;
+ border: none;
+ text-decoration: none;
+ color: white; cursor: pointer;
 }
 
 .main-header__item a:hover,
 .main-header__item a:active,
-.main-header__item a.active {
-  color: red;
+.main-header__item a.active{
+  color:rgb(255, 230, 0);
+}
+.main-header__item button:hover{
+	  color: rgb(255, 230, 0);
 }
 
 .mobile-nav {
@@ -118,8 +127,7 @@ form {
 .mobile-nav__item a:hover,
 .mobile-nav__item a.active {
   background: #2e0897;
-  color: white;
-  border-radius: 3px;
+  color: black;  border-radius: 3px;
 }
 
 #side-menu-toggle {
@@ -128,8 +136,7 @@ form {
   padding: 0.5rem;
   display: block;
   background: transparent;
-  color: white;
-  cursor: pointer;
+  color: black;  cursor: pointer;
 }
 
 #side-menu-toggle:focus {
@@ -161,7 +168,8 @@ form {
 }
 
 .card {
-	background-color: rgb(218, 216, 216);
+	height: 30rem;
+	background-color: rgb(207, 207, 207);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.26);
 }
 
@@ -178,11 +186,15 @@ form {
 }
 
 .card__image {
-  width: 100%;
+		width: 20rem;
+		height: 15rem;
+		display: flex;
 }
 
 .card__image img {
-  width: 100%;
+	    max-height: 100%;
+			max-width: 100%;
+	    margin: auto;
 }
 
 .card__actions {
@@ -201,32 +213,59 @@ form {
   text-decoration: none;
   font: inherit;
   border: 1px solid;
-  color: #2e0897;
-  background: rgb(218, 216, 216);
+	margin-top: 5px;
   border-radius: 3px;
-  cursor: pointer;
+	cursor: pointer;
+	border: 1px solid #0463a1;
+	background-color: transparent;
+	color: #0463a1;
 }
 
 .btn:hover,
 .btn:active {
-	background-color: #2e0897;
-color: white;
+	 	color: aliceblue;
+		background-color: #0463a1;
 }
 
 .btn.danger {
-color: red;
-border-color: red;
+color: rgb(207, 0, 0);
+border-color: rgb(207, 0, 0);
 }
 
 .btn.danger:hover,
 .btn.danger:active {
-background: red;
-  color: white;
+background: rgb(207, 0, 0);
+  color: white;}
+
+.btn.update {
+border: 1 solid;
+box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+outline: 1px solid;
+font: inherit;
+color: midnightblue;
+margin-top: 5px;
+background-color: transparent;
+outline-color: midnightblue;
+outline-offset: 0px;
+padding: 0.25rem 1rem;
+cursor: pointer;
+text-shadow: none;
+transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+
+}
+
+.btn.update:hover,
+.btn.update:active {
+	border: 1px solid;
+	box-shadow: inset 0 0 20px rgba(26, 25, 25, 0.5),
+	0 0 20px rgba(77, 77, 77, 0.2);
+	outline-color: rgba(255, 255, 255, 0);
+	outline-offset: 15px;
+	text-shadow: 1px 1px 2px #427388;
 }
 
 .error{
-	color: white;
-	margin-left: 1rem	;
+	color: black;	margin-left: 1rem	;
 }
 
 @media (min-width: 768px) {
