@@ -14,7 +14,8 @@
 	.form-control input,
 	.form-control textarea {
 		border: 1px solid darkgray;
-		color: black;		font: inherit;
+		color: black;		
+		font: caption;
 		background: whitesmoke;
 		border-radius: 2px;
 		line-height: 2rem;

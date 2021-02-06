@@ -2,9 +2,11 @@ const path = require("path");
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
 const session = require("express-session");
+const csrf = require("csurf");
+const mongoose = require("mongoose");
 const MongoDBStore = require("connect-mongodb-session")(session);
+const flash = require("connect-flash");
 
 const errorController = require("./controllers/error");
 const User = require("./models/user");
@@ -12,12 +14,12 @@ const User = require("./models/user");
 const MONGODB_URI =
   "mongodb+srv://Prateek:Prateek9144@cluster0.bo9ad.mongodb.net/shop";
 
+const app = express();
 const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: "sessions",
 });
-
-const app = express();
+const csrfProtection = csrf();
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -25,7 +27,6 @@ app.set("views", "views");
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const authRoutes = require("./routes/auth");
-const { log } = require("console");
 
 app.use(
   bodyParser.urlencoded({
@@ -42,6 +43,8 @@ app.use(
     store: store,
   })
 );
+app.use(csrfProtection);
+app.use(flash());
 
 app.use((req, res, next) => {
   if (!req.session.user) {
@@ -56,28 +59,21 @@ app.use((req, res, next) => {
     .catch((err) => console.log(err));
 });
 
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.session.isLoggedIn;
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
+
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
 
 app.use(errorController.get404);
 
-// app.use(errorController.error404);
 mongoose
   .connect(MONGODB_URI)
   .then((result) => {
-    User.findOne().then((user) => {
-      if (!user) {
-        const newUser = new User({
-          name: "Prateek",
-          email: "prateek@gmail.com",
-          cart: { items: [] },
-        });
-        newUser.save();
-        console.log("New User Created");
-      }
-    });
-
     app.listen(8000);
     console.log("local created");
   })
