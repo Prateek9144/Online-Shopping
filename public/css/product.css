@@ -17,7 +17,7 @@ justify-content: space-around;
 .product-item {
     width: 20rem;
     max-width: 95%;
-    margin: 1rem;
+    margin: 2rem 5rem;
 }
 
 .product__title {
