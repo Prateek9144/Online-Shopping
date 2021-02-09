@@ -1,5 +1,6 @@
 const User = require("../models/user");
 
+const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
@@ -84,6 +85,12 @@ exports.postSignup = (req, res, next) => {
           "E-mail already exist, pick a diffrenet one."
         );
         return res.redirect("/signup");
+      } else if (email.length <= 0) {
+        req.flash("errorMessage", "Email address must be filled out. ");
+        return res.redirect("/signup");
+      } else if (password.length <= 0) {
+        req.flash("errorMessage", "Password field is empty.");
+        return res.redirect("/signup");
       } else if (confirmPassword != password) {
         req.flash(
           "errorMessage",
@@ -101,13 +108,12 @@ exports.postSignup = (req, res, next) => {
       });
     })
     .then((result) => {
-    	  res.redirect("/login");
-    
+      res.redirect("/login");
       return transporter.sendMail({
         to: email,
         from: "prateekchouhan00@gmail.com",
         subject: "Signup Successful!",
-        html: "<h1  style=\"color:blue;\"> Welcome to Door Store! </h1><h3>You Successfully signed up to Door Store!</h3> ",
+        html: `<h1  style="color:blue;"> Welcome to Door Store! </h1><h3>You Successfully signed up to Door Store!</h3>`,
       });
     })
     .catch((err) => {
@@ -120,4 +126,104 @@ exports.postLogout = (req, res, next) => {
     console.log(err);
     res.redirect("/");
   });
+};
+
+exports.getReset = (req, res, next) => {
+  console.log("Reset Password");
+  let message = req.flash("error");
+  if (message.length > 0) {
+    message = message[0];
+  } else {
+    message = null;
+  }
+  res.render("auth/reset", {
+    path: "/reset",
+    pageTitle: "Reset Password",
+    errorMessage: message,
+  });
+};
+
+exports.postReset = (req, res, next) => {
+  const email = req.body.email;
+  crypto.randomBytes(32, (err, buffer) => {
+    if (err) {
+      console.log(err);
+      redirect("/reset");
+    }
+    const token = buffer.toString("hex");
+    User.findOne({ email: email })
+      .then((user) => {
+        if (!user) {
+          req.flash("error", "No account found with this email.");
+          return res.redirect("/reset");
+        }
+        user.resetToken = token;
+        user.resetTokenExpire = Date.now() + 3600000;
+        return user.save();
+      })
+      .then((result) => {
+        res.redirect("/");
+        transporter.sendMail({
+          to: email,
+          from: "prateekchouhan00@gmail.com",
+          subject: "Reset my password",
+          html: `<h1>Hello!</h1>
+					<p>We received a request to reset your Door store account password. Click the link below to choose a new one:</p>
+					<p><a href="http://localhost:8000/reset/${token}">Reset my password</a></p>`,
+        });
+      })
+      .catch((err) => console.log(err));
+  });
+};
+
+exports.getNewPassword = (req, res, next) => {
+  const token = req.params.token;
+
+  User.findOne({ resetToken: token, resetTokenExpire: { $gt: Date.now() } })
+    .then((user) => {
+      let message = req.flash("errorMessage");
+      if (message.length > 0) {
+        message = message[0];
+      } else {
+        message = null;
+      }
+      res.render("auth/new-password", {
+        path: "/new-password",
+        pageTitle: "Update Password",
+        errorMessage: message,
+        userId: user._id,
+        userEmail: user.email,
+        passwordToken: token,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.postNewPassword = (req, res, next) => {
+  newPassword = req.body.password;
+  userId = req.body.userId;
+  token = req.body.passwordToken;
+  let resetUser;
+  User.findOne({
+    _id: userId,
+    resetToken: token,
+    resetTokenExpire: { $gt: Date.now() },
+  })
+    .then((user) => {
+      resetUser = user;
+      return bcrypt.hash(newPassword, 12);
+    })
+    .then((hashpaword) => {
+      resetUser.password = hashpaword;
+      resetUser.resetToken = undefined;
+      resetUser.resetTokenExpire = undefined;
+			return resetUser.save();
+    }).then(result =>{
+			res.redirect("/login")
+		})
+    .catch((err) => {
+      console.log(err);
+    });
 };

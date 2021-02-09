@@ -40,12 +40,12 @@
 			<% if (!isAuthenticated) { %>
 				<li class="main-header__item">
 					<a class="<%= path === '/login' ? 'active' : '' %>" href="/login"
-						>Login</a
-					><li class="main-header__item">
+						>Login</a>
+				</li>
+					<li class="main-header__item">
 					<a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup"
-						>Sign Up</a
-					>
-				</li class="main-header__item">
+						>Sign Up</a>
+				</li>
 			<% }else{ %>
 			<li class="main-header__item">
 				<form action="/logout" method="POST">
@@ -96,6 +96,9 @@
 				<li class="mobile-nav__item">
 					<a class="<%= path === '/login' ? 'active' : '' %>" href="/login"
 						>Login</a
+					>
+					<a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup"
+						>Sign Up</a
 					>
 				</li class="mobile-nav__item">
 			<% }else{ %>

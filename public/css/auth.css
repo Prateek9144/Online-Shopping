@@ -12,8 +12,9 @@
 	font: inherit;
 	color: white;	
 	margin-top: 20px ;
-	background-color: rgb(0, 108, 141);
-	outline-color: black;	outline-offset: 1px;
+	margin-bottom: 1rem;
+	background-color: #0033ff;
+	outline-color: #0026bd;
 	font:caption;
 	padding: 0.25rem 1rem;
 	line-height: 2rem	;
@@ -27,8 +28,8 @@
 
 .login-btn:hover {
 	border: 1px solid;
-	box-shadow: inset 0 0 20px rgba(26, 25, 25, 0.5), 0 0 20px rgba(77, 77, 77, 0.2);
-	outline-color: rgba(255, 255, 255, 0);
+	box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(77, 77, 77, 0.2);
+	outline-color: rgba(151, 47, 47, 0);
 	outline-offset: 15px;
 	text-shadow: 1px 1px 2px #427388;
 }
@@ -36,4 +37,12 @@
 h2 {
 	text-align: center;
 	margin-top: 0% ;
+}
+a{
+	color: blue;
+	text-decoration:none;
+	font: message-box;
+}
+a:hover{
+	color: red;
 }
