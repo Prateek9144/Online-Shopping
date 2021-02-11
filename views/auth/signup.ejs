@@ -13,16 +13,34 @@
         <form class="login-form " action="/signup" method="POST">
 					<div class="form-control">
 						<h2>Sign Up</h2>
-							<input type="email" name="email" id="email" placeholder="Email address"	>
+							<input 
+							class="<%= validationErrors.find(e => e.param ==='email')?'invalid':'' %> "
+							type="email" 
+							name="email" 
+							id="email"
+						  placeholder="Email address" 
+							value="<%= oldInput.email %> "	>
 					</div>
             <div class="form-control">
-								<input type="password" name="password" id="password"  placeholder="Password" >
+								<input 
+								class="<%= validationErrors.find(e => e.param ==='password')?'invalid':'' %> "
+								type="password" 
+								name="password" 
+								id="password"  
+								placeholder="Password" 
+								value="<%= oldInput.password  %>" >
             </div>
             <div class="form-control">
-                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" >
+                <input 
+								class="<%= validationErrors.find(e => e.param ==='confirmPassword')?'invalid':'' %> "
+								type="password" 
+								name="confirmPassword" 
+								id="confirmPassword" 
+								placeholder="Confirm Password" 
+								value="<%= oldInput.confirmPassword %>">
 						</div>
 					  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button class="login-btn" type="submit">Sign Up</button>
+            <button class="login-btn" type="submit">Create Account </button>
         </form>
     </main>
 <%- include('../includes/end.ejs') %>

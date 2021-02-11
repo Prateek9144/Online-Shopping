@@ -11,10 +11,11 @@
 		width: 100%;
 		margin-bottom: 0.5rem;
 	}
+
 	.form-control input,
 	.form-control textarea {
 		border: 1px solid darkgray;
-		color: black;		
+		color: black;
 		font: caption;
 		background: whitesmoke;
 		border-radius: 2px;
@@ -23,6 +24,12 @@
 
 	.form-control input:focus,
 	.form-control textarea:focus {
-		background-color: white;		opacity: 100%;
+		background-color: white;
+		opacity: 100%;
 		color: black;
+	}
+
+	.form-control input.invalid,
+	.form-control textarea.invalid {
+		border-color: red;
 	}
