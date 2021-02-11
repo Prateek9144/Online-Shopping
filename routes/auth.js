@@ -10,7 +10,18 @@ router.get("/login", authController.getLogin);
 
 router.post(
   "/login",
-  check("email").isEmail().withMessage("Please enter a valid email."),
+  check("email")
+    .isEmail()
+    .withMessage("Please enter a valid email.")
+    .custom((value, { req }) => {
+      // console.log(value);
+      return User.findOne({ email: value }).then((userDoc) => {
+        if (!userDoc) {
+          console.log(value);
+          return Promise.reject("No account with this email.");
+        }
+      });
+    }),
   authController.postLogin
 );
 

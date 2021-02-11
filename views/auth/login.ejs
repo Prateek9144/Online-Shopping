@@ -13,10 +13,22 @@
         <form class="login-form " action="/login" method="POST">
 					<div class="form-control">
 						<h2>Login</h2>	
-							<input type="email" name="email" id="email" placeholder="Email address" value="<%= oldInput.email %>"	>
-					</div>
+							<input 
+							class="<%= validationErrors.find(e => e.param ==='email')?'invalid':'' %> "
+							type="email"
+							name="email"
+						  id="email" 
+							placeholder="Email address" 
+							value="<%= oldInput.email %>"	>
+						</div>
             <div class="form-control">			
-							<input type="password" name="password" id="password"  placeholder="Password" >
+							<input
+							class="<%= validationErrors.find(e => e.param ==='password')?'invalid':'' %> "
+							type="password" 
+							name="password" 
+							id="password"  
+							value="<%= oldInput.password %>"	
+							placeholder="Password" >
 						</div>
 						<input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <button class="login-btn" type="submit">Login</button>

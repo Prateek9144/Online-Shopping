@@ -26,23 +26,23 @@ exports.getLogin = (req, res, next) => {
     path: "/login",
     pageTitle: "Login",
     errorMessage: message,
-		oldInput:{email:""},
-		validationErrors:[]
+    oldInput: { email: "", password: "" },
+    validationErrors: [],
   });
 };
 
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-	const error = validationResult(req);
+  const error = validationResult(req);
   if (!error.isEmpty()) {
     console.log(error);
-    return res.status(422).render("auth/signup", {
-      path: "/signup",
-      pageTitle: "Sign Up",
+    return res.status(422).render("auth/login", {
+      path: "/login",
+      pageTitle: "Login",
       errorMessage: error.array()[0].msg,
-			oldInput:{email:email},
-			validationErrors : error.array()
+      oldInput: { email: email, password:password },
+      validationErrors: error.array(),
     });
   }
   User.findOne({ email: email })
@@ -62,8 +62,15 @@ exports.postLogin = (req, res, next) => {
               return res.redirect("/");
             });
           }
-          req.flash("error", "Invalid email or password");
-          return res.redirect("/login");
+
+          return res.status(422).render("auth/login", {
+            path: "/login",
+            pageTitle: "Login",
+            errorMessage:
+              "Your password is incorrect. Please try again, or set or reset your password",
+            oldInput: { email: email, password: password },
+            validationErrors: [{ param: "password" }],
+          });
         })
         .catch((err) => console.log(err));
     })
