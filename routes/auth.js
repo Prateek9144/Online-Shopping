@@ -10,18 +10,21 @@ router.get("/login", authController.getLogin);
 
 router.post(
   "/login",
-  check("email")
-    .isEmail()
-    .withMessage("Please enter a valid email.")
-    .custom((value, { req }) => {
-      // console.log(value);
-      return User.findOne({ email: value }).then((userDoc) => {
-        if (!userDoc) {
-          console.log(value);
-          return Promise.reject("No account with this email.");
-        }
-      });
-    }),
+  [
+    check("email")
+      .isEmail()
+      .withMessage("Please enter a valid email.")
+      .custom((value, { req }) => {
+        return User.findOne({ email: value }).then((userDoc) => {
+          if (!userDoc) {
+            console.log(value);
+            return Promise.reject("No account with this email.");
+          }
+        });
+      })
+      .normalizeEmail(),
+    body("password").trim(),
+  ],
   authController.postLogin
 );
 
@@ -45,17 +48,19 @@ router.post(
             );
           }
         });
-      }),
-    body(
-      "password",
-      "Please use 8 or more characters in your password"
-    ).isLength({ min: 8 }),
-    body("confirmPassword").custom((value, { req }) => {
-      if (value !== req.body.password) {
-        throw new Error("Those passwords didn’t match");
-      }
-      return true;
-    }),
+      })
+      .normalizeEmail(),
+    body("password", "Please use 8 or more characters in your password")
+      .isLength({ min: 8 })
+      .trim(),
+    body("confirmPassword")
+      .custom((value, { req }) => {
+        if (value !== req.body.password) {
+          throw new Error("Those passwords didn’t match");
+        }
+        return true;
+      })
+      .trim(),
   ],
   authController.postSignup
 );
