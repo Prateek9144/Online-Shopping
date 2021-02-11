@@ -7,42 +7,45 @@
 
 .shop-item {
 
-flex-wrap: wrap;
-box-shadow: 0 2px 6px rgb(5, 5, 5);
-padding: 5px;
-margin: 20px;
-width: 30rem;
-justify-content: space-around;
-}
-.product-item {
-    width: 20rem;
-    max-width: 95%;
-    margin: 2rem 5rem;
+	flex-wrap: wrap;
+	/* box-shadow: 0 2px 6px rgb(5, 5, 5); */
+	padding: 5px;
+	margin: 20px;
+	width: 30rem;
+	border: 1px solid lightgray;
+	justify-content: space-around;
 }
 
+.shop-item:hover{
+	transition: .3s ease-in-out;
+	box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2),
+	0 10px 30px 0 rgba(0, 0, 0, 0.19);
+}
+
+
 .product__title {
-		font-size: 1.2rem;
-		text-align: center;
+	font-size: 1.2rem;
+	text-align: center;
 }
 
 .product__price {
-    text-align: center;
-    color: #3d3d3d;
-    margin-bottom: 0.5rem;
+	text-align: center;
+	color: #3d3d3d;
+	margin-bottom: 0.5rem;
 }
 
 .product__description {
-    text-align: center;
+	text-align: center;
 }
 
 .shop-item-image {
-	    height: 250px;
-	    /* max-wi	dth: 28rem; */
-	    display: flex;
+	height: 250px;
+	/* max-wi	dth: 28rem; */
+	display: flex;
 }
 
 .shop-item-image img {
-	max-width: 100%;
+	max-width: 95%;
 	max-height: 100%;
 	margin: auto;
 }
@@ -55,30 +58,34 @@ justify-content: space-around;
 
 .shop-item-price {
 	flex-grow: 2;
-	color: black;}
-
-	.shop-item-title {
-		display: block;
-		width: 100%;
-		text-align: center;
-		font-weight: bold;
-		font-size: 1.5em;
-		color: black;		margin-bottom: 15px;
-	}
-.shop-item-button{
-	  display: inline-block;
-	  padding: 0.25rem 1rem;
-	  text-decoration: none;
-	  font: inherit;
-	  border-radius: 3px;
-	  cursor: pointer;
-	  border: 1px solid midnightblue;
-	  background-color: transparent;
-	  color: midnightblue;
-		margin: 2px;
+	color: black;
 }
+
+.shop-item-title {
+	display: block;
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.5em;
+	color: black;
+	margin-bottom: 15px;
+}
+
+.shop-item-button {
+	display: inline-block;
+	padding: 0.25rem 1rem;
+	text-decoration: none;
+	font: inherit;
+	border-radius: 3px;
+	cursor: pointer;
+	border: 1px solid midnightblue;
+	background-color: transparent;
+	color: midnightblue;
+	margin: 2px;
+}
+
 .shop-item-button:hover,
 .shop-item-button:active {
-	background-color:midnightblue;
+	background-color: midnightblue;
 	color: aliceblue;
 }

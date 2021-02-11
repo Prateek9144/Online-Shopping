@@ -3,8 +3,8 @@
     <link rel="stylesheet" href="/css/auth.css">
 </head>
 
-<body>https://www.ft.com/__origami/service/image/v2/images/raw/https://d1e00ek4ebabms.cloudfront.net/production/098e1a95-c754-4a8b-b7da-acedc702aae1.jpg?source=next&fit=scale-down&quality=highest&width=1067
-   <%- include('../includes/navigation.ejs') %>
+<body>
+	   <%- include('../includes/navigation.ejs') %>
 
     <main>
 			<% if (errorMessage) { %>
@@ -13,7 +13,7 @@
         <form class="login-form " action="/login" method="POST">
 					<div class="form-control">
 						<h2>Login</h2>	
-							<input type="email" name="email" id="email" placeholder="Email address"	>
+							<input type="email" name="email" id="email" placeholder="Email address" value="<%= oldInput.email %>"	>
 					</div>
             <div class="form-control">			
 							<input type="password" name="password" id="password"  placeholder="Password" >

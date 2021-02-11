@@ -26,13 +26,25 @@ exports.getLogin = (req, res, next) => {
     path: "/login",
     pageTitle: "Login",
     errorMessage: message,
+		oldInput:{email:""},
+		validationErrors:[]
   });
 };
 
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-
+	const error = validationResult(req);
+  if (!error.isEmpty()) {
+    console.log(error);
+    return res.status(422).render("auth/signup", {
+      path: "/signup",
+      pageTitle: "Sign Up",
+      errorMessage: error.array()[0].msg,
+			oldInput:{email:email},
+			validationErrors : error.array()
+    });
+  }
   User.findOne({ email: email })
     .then((user) => {
       if (!user) {
@@ -71,6 +83,12 @@ exports.getSignup = (req, res, next) => {
     path: "/signup",
     pageTitle: "Sign Up",
     errorMessage: message,
+    oldInput: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validationErrors: [],
   });
 };
 
@@ -85,37 +103,23 @@ exports.postSignup = (req, res, next) => {
       path: "/signup",
       pageTitle: "Sign Up",
       errorMessage: error.array()[0].msg,
+      oldInput: {
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword,
+      },
+      validationErrors: error.array(),
     });
   }
-  User.findOne({ email: email })
-    .then((userDoc) => {
-      if (userDoc) {
-        req.flash(
-          "errorMessage",
-          "E-mail already exist, pick a diffrenet one."
-        );
-        return res.redirect("/signup");
-      } else if (email.length <= 0) {
-        req.flash("errorMessage", "Email address must be filled out. ");
-        return res.redirect("/signup");
-      } else if (password.length <= 0) {
-        req.flash("errorMessage", "Password field is empty.");
-        return res.redirect("/signup");
-      } else if (confirmPassword != password) {
-        req.flash(
-          "errorMessage",
-          "Entered password and confirm password won't match, please try again!"
-        );
-        return res.redirect("/signup");
-      }
-      return bcrypt.hash(password, 12).then((bcryptPassword) => {
-        const newUser = new User({
-          email: email,
-          password: bcryptPassword,
-          cart: { items: [] },
-        });
-        return newUser.save();
+  return bcrypt
+    .hash(password, 12)
+    .then((bcryptPassword) => {
+      const newUser = new User({
+        email: email,
+        password: bcryptPassword,
+        cart: { items: [] },
       });
+      return newUser.save();
     })
     .then((result) => {
       res.redirect("/login");
