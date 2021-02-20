@@ -74,7 +74,11 @@ exports.postLogin = (req, res, next) => {
         })
         .catch((err) => console.log(err));
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = err;
+      error.httpsStatusCode = 500;
+      return next(500);
+    });
 };
 
 exports.getSignup = (req, res, next) => {
@@ -134,11 +138,13 @@ exports.postSignup = (req, res, next) => {
         to: email,
         from: "prateekchouhan00@gmail.com",
         subject: "Signup Successful!",
-        html: `<h1  style="color:blue;"> Welcome to Door Store! </h1><h3>You Successfully signed up to Door Store!</h3>`,
+        html: `<h1  style="color:blue;"> Welcome to Shopticon! </h1><h3>You Successfully signed up to Shopticon!</h3>`,
       });
     })
     .catch((err) => {
-      console.log(err);
+      const error = err;
+      error.httpsStatusCode = 500;
+      return next(500);
     });
 };
 
@@ -161,7 +167,11 @@ exports.getReset = (req, res, next) => {
     path: "/reset",
     pageTitle: "Reset Password",
     errorMessage: message,
-  });
+  })    .catch((err) => {
+      const error = err;
+      error.httpsStatusCode = 500;
+      return next(500);
+    });;
 };
 
 exports.postReset = (req, res, next) => {
@@ -188,12 +198,16 @@ exports.postReset = (req, res, next) => {
           to: email,
           from: "prateekchouhan00@gmail.com",
           subject: "Reset my password",
-          html: `<h1>Hello!</h1>
-					<p>We received a request to reset your Door store account password. Click the link below to choose a new one:</p>
+          html: `<h1>Did you fogot your password?</h1>
+					<p>Here we received a request to reset your Shopticon account password. Click the link below to choose a new one:</p>
 					<p><a href="http://localhost:8000/reset/${token}">Reset my password</a></p>`,
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        const error = err;
+        error.httpsStatusCode = 500;
+        return next(500);
+      });
   });
 };
 
@@ -218,7 +232,9 @@ exports.getNewPassword = (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.log(err);
+      const error = err;
+      error.httpsStatusCode = 500;
+      return next(500);
     });
 };
 
@@ -246,6 +262,8 @@ exports.postNewPassword = (req, res, next) => {
       res.redirect("/login");
     })
     .catch((err) => {
-      console.log(err);
+      const error = err;
+      error.httpsStatusCode = 500;
+      return next(500);
     });
 };

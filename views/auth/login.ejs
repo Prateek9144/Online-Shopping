@@ -29,11 +29,11 @@
 							id="password"  
 							value="<%= oldInput.password %>"	
 							placeholder="Password" >
+							<a href="/reset" class="forgot">Forgot Password?</a><br>	
 						</div>
 						<input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <button class="login-btn" type="submit">Login</button>
-						<a href="/reset">Forgot Password?</a><br>	
-						<a href="/signup">Create New Account?</a>
+						Don't have an account? <a href="/signup">Sign Up</a>
         </form>
     </main>
 <%- include('../includes/end.ejs') %>

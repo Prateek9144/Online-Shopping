@@ -11,7 +11,9 @@ exports.getProducts = (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.log(err);
+      const error = err;
+      error.httpsStatusCode = 500;
+      return next(500);
     });
 };
 
@@ -25,8 +27,11 @@ exports.getProduct = (req, res, next) => {
         path: "/products",
       });
     })
-    .catch((err) => console.log(err));
-};
+    .catch((err) => {
+      const error = err;
+      error.httpsStatusCode = 500;
+      return next(500);
+    });};
 
 exports.getIndex = (req, res, next) => {
   Product.find()
@@ -34,12 +39,14 @@ exports.getIndex = (req, res, next) => {
       console.log(req.session.isLoggedIn);
       res.render("shop/index", {
         prods: products,
-        pageTitle: "Shop",
+        pageTitle: "Shopitcon",
         path: "/",
       });
     })
     .catch((err) => {
-      console.log(err);
+      const error = err;
+      error.httpsStatusCode = 500;
+      return next(500);
     });
 };
 
@@ -56,7 +63,11 @@ exports.getCart = (req, res, next) => {
         products: products,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = err;
+      error.httpsStatusCode = 500;
+      return next(500);
+    });
 };
 
 exports.postCart = (req, res, next) => {
@@ -78,7 +89,11 @@ exports.postCartDeleteProduct = (req, res, next) => {
     .then((result) => {
       res.redirect("/cart");
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = err;
+      error.httpsStatusCode = 500;
+      return next(500);
+    });
 };
 
 exports.postOrder = (req, res, next) => {
@@ -107,7 +122,11 @@ exports.postOrder = (req, res, next) => {
     .then((result) => {
       res.redirect("/orders");
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = err;
+      error.httpsStatusCode = 500;
+      return next(500);
+    });
 };
 
 exports.getOrders = (req, res, next) => {
@@ -120,5 +139,9 @@ exports.getOrders = (req, res, next) => {
         orders: orders,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = err;
+      error.httpsStatusCode = 500;
+      return next(500);
+    });
 };
