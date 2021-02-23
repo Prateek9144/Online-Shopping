@@ -12,7 +12,7 @@
 	outline: 1px solid;
 	font: inherit;
 	color: white;
-		margin-bottom: 1rem;
+	margin: 1rem 0;
 	background-color: #0033ff;
 	outline-color: #0026bd;
 	font: caption;
@@ -28,7 +28,7 @@
 
 .login-btn:hover {
 	border: 1px solid;
-	box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(77, 77, 77, 0.2);
+	box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.7), 0 0 20px rgba(77, 77, 77, 0.2);
 	outline-color: rgba(151, 47, 47, 0);
 	outline-offset: 15px;
 	text-shadow: 1px 1px 2px #427388;

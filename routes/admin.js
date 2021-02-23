@@ -1,7 +1,7 @@
 const path = require("path");
 
 const express = require("express");
-const { body } = require("express-validator/check");
+const { body } = require("express-validator");
 
 const adminController = require("../controllers/admin");
 const isAuth = require("../middleware/is-Auth");
@@ -22,7 +22,6 @@ router.post(
   "/add-product",
   [
     body("title").isLength({ min: 3 }).isString().trim(),
-    body("imageUrl").isURL(),
     body("price").isFloat(),
     body("description").isLength({ min: 10}).trim(),
   ],
@@ -36,7 +35,6 @@ router.post(
   "/edit-product",
   [
     body("title").isLength({ min: 3 }).isString().trim(),
-    body("imageUrl").isURL(),
     body("price").isFloat(),
     body("description").isLength({ min: 10 }).trim(),
   ],

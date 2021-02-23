@@ -1,7 +1,6 @@
 	.form-control {
-		font-size: larger;
+		font-size: large;
 		color: black;
-		margin: 1rem 0;
 	}
 
 	.form-control label,
@@ -12,6 +11,10 @@
 		/* margin-bottom: 0.5rem; */
 	}
 
+	.form-control label {
+		color: rgb(44, 43, 43);
+	}
+
 	.form-control input,
 	.form-control textarea {
 		border: 1px solid darkgray;
@@ -20,6 +23,7 @@
 		background: whitesmoke;
 		border-radius: 2px;
 		line-height: 2rem;
+		margin-top: 1rem;
 	}
 
 	.form-control input:focus,

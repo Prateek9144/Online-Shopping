@@ -12,3 +12,4 @@ Shopticon is an Open Source E-Commerce Platform based on Node.js.
 
 - Install the requirements using `npm install`
 - Run server `npm start`
+

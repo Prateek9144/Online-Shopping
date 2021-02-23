@@ -87,8 +87,7 @@
 	margin: 2px;
 }
 
-.shop-item-button:hover,
-.shop-item-button:active {
+.shop-item-button:hover{
 	background-color: midnightblue;
 	color: aliceblue;
-}
+} 	

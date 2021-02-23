@@ -10,41 +10,51 @@
 				<% if (errorMessage) { %>
 					<div class="user-message user-message--error"><%= errorMessage %> </div>
 				<% } %>
-        <form class="product-form" action="/admin/<% if(editing) {%>edit-product<%}else{ %>add-product<%}%>" method="POST">
-					<h1><% if(editing) {%>Edit Product<%}else{ %>Add new product<%}%></h1>
+        <form class="product-form" action="/admin/<% if(editing) {%>edit-product<%}else{ %>add-product<%}%>" method="POST" enctype="multipart/form-data">
+					<h1 ><% if(editing) {%>EDIT PRODUCT<%}else{ %>ADD NEW PRODUCT<%}%></h1>
             <div class="form-control">
+							<label class="form-control">Title</label>
                 <input 
 								class="<%= validationErrors.find(e => e.param ==='title')?'invalid':'' %> "
 								type="text" 
 								name="title" 
 								id="title" 
-								placeholder="Title"
 								value = "<% if(editing||hasError) {%><%=product.title%><%}%>">
             </div>
-            <div class="form-control">
-                <input type="text" 
+             <div class="form-control">
+                <label for="image">Image</label>
+                <input 
+                    type="file" 
+                    name="image" 
+                    id="image" >
+            </div>
+            <!-- <div class="form-control">
+                <label class="form-control">Image URL</label>
+              <input type="text" 
 								class="<%= validationErrors.find(e => e.param ==='imageUrl')?'invalid':'' %> "
 								name="imageUrl" 
 								id="imageUrl" 
-								placeholder="Image URL"
+								Image URL"
 								value = "<% if(editing||hasError) {%><%=product.imageUrl%><%}%>">
-            </div>
+            </div> -->
             <div class="form-control">
+							<label class="form-control">Price</label>
                 <input 
 								class="<%= validationErrors.find(e => e.param ==='price')?'invalid':'' %> "
 								type="number" 
 								name="price" 
 								id="price" 
-								placeholder="Price"
 								step="0.01"
 								value = "<% if(editing||hasError) {%><%=product.price%><%}%>">
 							</div>
 							<div class="form-control">
+								<label class="form-control">Description</label>
+              
                 <textarea 
 									class="<%= validationErrors.find(e => e.param === 'description') ? 'invalid' : '' %>"
 									name="description" 
 									id="description" 
-									placeholder="Description of product"
+									of product"
 									rows="5"
 									><% if (editing || hasError) { %><%= product.description %><% } %></textarea>
             </div>
