@@ -1,8 +1,11 @@
 .product-form {
-	width: 20rem;
-	max-width: 90%;
-	margin: auto;
-	display: block;
+		width: 30rem;
+		max-width: 100%;
+		margin: auto;
+		margin-top: 3rem;
+		border: 1px solid rgb(167, 167, 167);
+		padding: 1.25rem;
+		display: block;
 }
 
 .shop-item {
@@ -84,8 +87,7 @@
 	margin: 2px;
 }
 
-.shop-item-button:hover,
-.shop-item-button:active {
+.shop-item-button:hover{
 	background-color: midnightblue;
 	color: aliceblue;
-}
+} 	

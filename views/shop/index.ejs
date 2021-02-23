@@ -12,10 +12,10 @@
        				<div class="shop-item">
 								<span class="shop-item-title"><%= product.title %></span>
 								<div  class="shop-item-image">
-									<img  src="<%= product.imageUrl %>" alt="<%= product.title %>">
+									<img  src="/<%= product.imageUrl %>" alt="<%= product.title %>">
 								</div>
                 <div class="shop-item-details">
-										<h2 class="shop-item-price"> $ <%= product.price %></h2>
+										<h2 class="shop-item-price"> Rs. <%= product.price %></h2>
 										<a href="/product/<%= product._id%>" class = 'shop-item-button'>Details</a>
 													<%- include('../includes/add-to-cart.ejs',{product : product})%>
               </div>
