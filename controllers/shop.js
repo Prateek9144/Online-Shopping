@@ -117,17 +117,15 @@ exports.postCart = (req, res, next) => {
     });
 };
 
-exports.postCartDeleteProduct = (req, res, next) => {
-  const prodId = req.body.productId;
+exports.deleteCartProduct = (req, res, next) => {
+  const prodId = req.params.productId;
   req.user
     .removeFromCart(prodId)
     .then((result) => {
-      res.redirect("/cart");
+      res.status(200).json({ message: "Deleted Successful" });
     })
     .catch((err) => {
-      const error = err;
-      error.httpsStatusCode = 500;
-      return next(500);
+      res.status(500).json({ message: "Failed to Delete" });
     });
 };
 

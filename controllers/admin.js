@@ -53,10 +53,7 @@ exports.postAddProduct = (req, res, next) => {
       validationErrors: error.array(),
     });
   }
-  const imageUrl =  image.path;
-  console.log(image.path);
-  console.log(imageUrl);
-
+  const imageUrl = image.path;
   const product = new Product({
     title: title,
     price: price,
@@ -174,8 +171,8 @@ exports.getProducts = (req, res, next) => {
     });
 };
 
-exports.postDeleteProduct = (req, res, next) => {
-  const prodId = req.body.productId;
+exports.deleteProduct = (req, res, next) => {
+  const prodId = req.params.productId;
   Product.findById(prodId)
     .then((prod) => {
       if (!prod) {
@@ -185,13 +182,11 @@ exports.postDeleteProduct = (req, res, next) => {
       return Product.deleteOne({ _id: prodId, userId: req.user._id }).then(
         () => {
           console.log("DESTROYED PRODUCT");
-          res.redirect("/admin/products");
+          res.status(200).json({ message: "Deleted Successful" });
         }
       );
     })
     .catch((err) => {
-      const error = err;
-      error.httpsStatusCode = 500;
-      return next(500);
+      res.status(500).json({ message: "Failed to Delete" });
     });
 };
