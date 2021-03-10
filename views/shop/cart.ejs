@@ -14,14 +14,16 @@
 																<input type="hidden" value="<%= p.productId._id %>" name="productId">
 																<input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                 <button class="btn danger" type="button" onclick="deleteCartProduct(this)">Delete</button>
+
 												</li>
 										<% }) %>
 								</ul>
 								<hr>
-								<div class=" center">
-									<form action="/create-order" method="POST">
+								<div class=" center order-center">
+									<!-- <form action="/checkout" method="GET">
 										<input type="hidden" name="_csrf" value="<%= csrfToken %>">
-										<button class="order-btn" type="submit">Order Now!</button>
+										<button class="order-btn" type="submit">Checkout</button> -->
+										<a class="order-btn" href="/checkout">Order Now!</a>
 									</form>		
 								</div>
             <% } else { %>
