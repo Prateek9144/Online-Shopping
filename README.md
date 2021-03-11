@@ -1,4 +1,4 @@
-	# Online-Store
+# Online-Store
 
 Shopticon is an Open Source E-Commerce Platform based on Node.js.
 
