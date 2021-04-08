@@ -11,13 +11,11 @@ const multer = require("multer");
 
 const errorController = require("./controllers/error");
 const User = require("./models/user");
-
-const MONGODB_URI =
-  "mongodb+srv://Prateek:Prateek9144@cluster0.bo9ad.mongodb.net/shop";
+require("dotenv").config();
 
 const app = express();
 const store = new MongoDBStore({
-  uri: MONGODB_URI,
+  uri: process.env.MONGODB_URI,
   collection: "sessions",
 });
 const csrfProtection = csrf();
@@ -110,7 +108,10 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then((result) => {
     app.listen(8000);
     console.log("local created");

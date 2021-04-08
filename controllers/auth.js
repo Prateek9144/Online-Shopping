@@ -5,12 +5,12 @@ const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
 const { validationResult } = require("express-validator");
+require("dotenv").config();
 
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
-      api_key:
-        "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",
+      api_key: process.env.SENDGRID_API,
     },
   })
 );
@@ -41,7 +41,7 @@ exports.postLogin = (req, res, next) => {
       path: "/login",
       pageTitle: "Login",
       errorMessage: error.array()[0].msg,
-      oldInput: { email: email, password:password },
+      oldInput: { email: email, password: password },
       validationErrors: error.array(),
     });
   }
@@ -167,15 +167,12 @@ exports.getReset = (req, res, next) => {
     path: "/reset",
     pageTitle: "Reset Password",
     errorMessage: message,
-  })    .catch((err) => {
-      const error = err;
-      error.httpsStatusCode = 500;
-      return next(500);
-    });;
+  });
 };
 
 exports.postReset = (req, res, next) => {
   const email = req.body.email;
+  console.log(email);
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
       console.log(err);

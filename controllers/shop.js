@@ -1,10 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 const PDFDocument = require("pdfkit");
-const stripe = require("stripe")(
-  "sk_test_51ITBO4IMqrcBzh3wIna3zKLoHlkpA1ozqpftbJTZ3TTMeChQrrcVR5fcIzkZlDwbX6ara78BIGL76cXrAqy2HbLQ00JGWXylvj"
-);
+require("dotenv").config();
 
+const stripe = require("stripe")(process.env.Strip_API);
 const Product = require("../models/product");
 const Order = require("../models/order");
 const ITEMS_PER_PAGE = 6;
@@ -109,8 +108,8 @@ exports.getCart = (req, res, next) => {
 };
 
 exports.getCheckout = (req, res, next) => {
-	let total = 0;
-	let product
+  let total = 0;
+  let product;
   req.user
     .populate("cart.items.productId")
     .execPopulate()
@@ -148,7 +147,7 @@ exports.getCheckout = (req, res, next) => {
     .catch((err) => {
       const error = err;
       error.httpsStatusCode = 500;
-			console.log(err);
+      console.log(err);
       return next(500);
     });
 };
