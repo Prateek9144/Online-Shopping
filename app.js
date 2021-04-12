@@ -113,7 +113,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then((result) => {
-    app.listen(process.env.Port || 8080);
+    app.listen(process.env.PORT || 8080);
     console.log("local created");
   })
   .catch((err) => {
