@@ -191,9 +191,10 @@ exports.postReset = (req, res, next) => {
       })
       .then((result) => {
         res.redirect("/");
-        const url = `http://localhost:${
-          process.env.PORT || 8080
-        }/reset/${token}`;
+        let         url = `http://localhost:8080/reset/${token}`;
+				if(process.env.PORT)
+        url = `https://shopticon.herokuapp.com/reset/${token}`;
+				
         transporter.sendMail({
           to: email,
           from: "contactshopticon@gmail.com",
