@@ -62,7 +62,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use(
   session({
-    secret: "my secret",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
     store: store,
@@ -114,7 +114,7 @@ mongoose
   })
   .then((result) => {
     app.listen(process.env.PORT || 8080);
-    console.log("local created");
+    console.log("Server created");
   })
   .catch((err) => {
     console.log(err);

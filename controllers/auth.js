@@ -136,7 +136,7 @@ exports.postSignup = (req, res, next) => {
       res.redirect("/login");
       return transporter.sendMail({
         to: email,
-        from: "prateekchouhan00@gmail.com",
+        from: "contactshopticon@gmail.com",
         subject: "Signup Successful!",
         html: `<h1  style="color:blue;"> Welcome to Shopticon! </h1><h3>You Successfully signed up to Shopticon!</h3>`,
       });
@@ -191,13 +191,16 @@ exports.postReset = (req, res, next) => {
       })
       .then((result) => {
         res.redirect("/");
+        const url = `http://localhost:${
+          process.env.PORT || 8080
+        }/reset/${token}`;
         transporter.sendMail({
           to: email,
-          from: "prateekchouhan00@gmail.com",
+          from: "contactshopticon@gmail.com",
           subject: "Reset my password",
           html: `<h1>Did you fogot your password?</h1>
 					<p>Here we received a request to reset your Shopticon account password. Click the link below to choose a new one:</p>
-					<p><a href="http://localhost:8000/reset/${token}">Reset my password</a></p>`,
+					<p><a href="${url}">Reset my password</a></p>`,
         });
       })
       .catch((err) => {
