@@ -3,7 +3,7 @@ const path = require("path");
 const PDFDocument = require("pdfkit");
 require("dotenv").config();
 
-const stripe = require("stripe")(process.env.Strip_API);
+const stripe = require("stripe")(process.env.STRIPE_API);
 const Product = require("../models/product");
 const Order = require("../models/order");
 const ITEMS_PER_PAGE = 6;
@@ -92,8 +92,12 @@ exports.getCart = (req, res, next) => {
     .populate("cart.items.productId")
     .execPopulate()
     .then((user) => {
-      console.log(user.cart.items);
       products = user.cart.items;
+      console.log(products);
+      products = products.filter((p) => {
+        if (p.productId != null) return p;
+      });
+      console.log(products);
       res.render("shop/cart", {
         path: "/cart",
         pageTitle: "Your Cart",
@@ -114,8 +118,11 @@ exports.getCheckout = (req, res, next) => {
     .populate("cart.items.productId")
     .execPopulate()
     .then((user) => {
-      console.log(user.cart.items);
       products = user.cart.items;
+      products = products.filter((p) => {
+        if (p.productId != null) return p;
+      });
+
       products.forEach((p) => {
         total = p.quantity * p.productId.price;
       });
@@ -131,7 +138,7 @@ exports.getCheckout = (req, res, next) => {
           };
         }),
         success_url:
-          req.protocol + "://" + req.get("host") + "/checkout/success", // => http://localhost:3000
+          req.protocol + "://" + req.get("host") + "/checkout/success",
         cancel_url: req.protocol + "://" + req.get("host") + "/checkout/cancel",
       });
     })
@@ -182,7 +189,11 @@ exports.getCheckoutSuccess = (req, res, next) => {
     .execPopulate()
     .then((user) => {
       console.log(user.cart.items);
-      products = user.cart.items.map((item) => {
+      products = user.cart.items;
+      products = products.filter((p) => {
+        if (p.productId != null) return p;
+      });
+      products = products.map((item) => {
         return { quantity: item.quantity, product: { ...item.productId._doc } };
       });
       const orders = new Order({
