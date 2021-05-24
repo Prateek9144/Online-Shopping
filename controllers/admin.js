@@ -159,7 +159,9 @@ exports.getProducts = (req, res, next) => {
   Product.find({ userId: req.user._id })
     .then((products) => {
       products = products.filter((p) => {
-        if (p.description.length > 10)
+        if (p.title.length > 25)
+          p.title = p.title.substring(0, 25) + "...";
+       if (p.description.length > 60)
           p.description = p.description.substring(0, 60) + "...";
         return p;
       });

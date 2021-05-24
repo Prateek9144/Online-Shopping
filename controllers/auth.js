@@ -88,8 +88,6 @@ exports.getSignup = (req, res, next) => {
   } else {
     message = null;
   }
-  console.log(message);
-  console.log(req.session.inLoggedIn);
   res.render("auth/signup", {
     path: "/signup",
     pageTitle: "Sign Up",
