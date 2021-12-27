@@ -10,15 +10,17 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 const flash = require("connect-flash");
 const multer = require("multer");
 const compression = require("compression");
-const morgan = require('morgan');
+const morgan = require("morgan");
 
 const errorController = require("./controllers/error");
 const User = require("./models/user");
 require("dotenv").config();
 
 const app = express();
+
+const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.bo9ad.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 const store = new MongoDBStore({
-  uri: process.env.MONGODB_URI,
+  uri: MONGODB_URI,
   collection: "sessions",
 });
 const csrfProtection = csrf();
@@ -119,7 +121,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(process.env.MONGODB_URI, {
+  .connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
